@@ -1,0 +1,320 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap");
+
+.miniature-world {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  background: #b8d6dc;
+  color: #4c4a40;
+  font-family: "DM Sans", sans-serif;
+}
+
+.miniature-world canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.mini-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 27px 5%;
+  color: #485e55;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  border-bottom: 1px solid rgba(61, 84, 69, 0.16);
+  pointer-events: none;
+}
+
+.mini-intro {
+  position: absolute;
+  top: 17%;
+  left: 6%;
+  pointer-events: none;
+}
+
+.mini-intro p,
+.discovery-card > p {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #657b61;
+}
+
+.mini-intro h1 {
+  margin: 18px 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(55px, 7vw, 88px);
+  font-weight: 400;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  color: #405847;
+}
+
+.mini-intro h1 i {
+  color: #a16e78;
+  font-weight: 400;
+}
+
+.mini-intro > span {
+  font-size: 11px;
+  color: #52685b;
+}
+
+.mini-hint {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 90%;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: #506452;
+  pointer-events: none;
+}
+
+.mini-footer {
+  position: absolute;
+  right: 5%;
+  bottom: 25px;
+  font-size: 8px;
+  letter-spacing: 0.13em;
+  color: #5c6c5e;
+  pointer-events: none;
+}
+
+.discovery-card {
+  position: absolute;
+  right: 5%;
+  bottom: 18%;
+  width: min(310px, 88%);
+  padding: 24px;
+  border: 1px solid rgba(101, 123, 97, 0.22);
+  background: rgba(250, 246, 231, 0.94);
+  box-shadow: 0 15px 50px rgba(56, 72, 49, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.discovery-card h2 {
+  margin: 12px 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 30px;
+  font-weight: 500;
+  color: #405847;
+}
+
+.discovery-card > span {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #6a7160;
+}
+
+.discovery-close {
+  position: absolute;
+  top: 9px;
+  right: 12px;
+  border: 0;
+  background: transparent;
+  color: #657b61;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .mini-intro {
+    top: 15%;
+    left: 6%;
+  }
+
+  .mini-intro h1 {
+    font-size: 57px;
+  }
+
+  .mini-header {
+    padding: 22px 5%;
+    font-size: 8px;
+  }
+
+  .discovery-card {
+    right: 6%;
+    bottom: 15%;
+  }
+
+  .mini-footer {
+    font-size: 7px;
+  }
+}
+.miniature-world canvas {
+  position: absolute !important;
+  inset: 0;
+  z-index: 0;
+}
+
+.mini-header,
+.mini-intro,
+.mini-hint,
+.mini-footer,
+.discovery-card {
+  position: absolute;
+  z-index: 2;
+}
+
+.discovery-card {
+  pointer-events: auto;
+}
+
+.discovery-close {
+  position: relative;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+
+.journal-button {
+  position: absolute;
+  top: 82px;
+  right: 5%;
+  z-index: 5;
+  padding: 11px 16px;
+  border: 1px solid rgba(101, 123, 97, 0.25);
+  border-radius: 24px;
+  background: rgba(250, 246, 231, 0.95);
+  color: #405847;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.journal-panel {
+  position: absolute;
+  top: 135px;
+  right: 5%;
+  z-index: 6;
+  width: min(320px, 90%);
+  max-height: 60vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 25px;
+  background: rgba(250, 246, 231, 0.97);
+  border: 1px solid rgba(101, 123, 97, 0.22);
+  box-shadow: 0 15px 50px rgba(56, 72, 49, 0.12);
+  color: #52685b;
+}
+
+.journal-panel > p {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+}
+
+.journal-panel h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: #405847;
+}
+
+.journal-panel ul {
+  padding-left: 20px;
+  line-height: 2;
+  font-size: 12px;
+}
+
+.journal-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border: 0;
+  background: transparent;
+  font-size: 23px;
+  color: #657b61;
+  cursor: pointer;
+}
+
+@media (max-width: 650px) {
+  .journal-button {
+    top: 68px;
+  }
+
+  .journal-panel {
+    top: 115px;
+  }
+}
+
+.journal-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+
+.journal-list li {
+  margin: 4px 0;
+}
+
+.journal-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 6px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #52685b;
+  text-align: left;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.journal-entry:hover {
+  background: rgba(157, 187, 125, 0.2);
+}
+
+.journal-entry-arrow {
+  margin-left: auto;
+  opacity: 0.45;
+}
+.back-to-atlas {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 20;
+  padding: 10px 16px;
+  border: 1px solid #ffffff80;
+  border-radius: 30px;
+  background: #ffffffd9;
+  color: #51465e;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.forest-actions {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.forest-actions .journal-button {
+  position: static;
+}
+
+@media (max-width: 600px) {
+  .forest-actions {
+    top: 76px;
+    right: 16px;
+    left: 16px;
+  }
+}
