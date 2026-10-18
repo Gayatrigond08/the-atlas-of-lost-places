@@ -214,7 +214,56 @@ function Cottage({ onDiscover }) {
   );
 }
 
-function World({ onDiscover }) {
+
+function SecretDoor({ onClick, unlocked }) {
+  return (
+    <group position={[0, 0.12, -2.1]}>
+      {/* Hidden stone frame */}
+      <mesh position={[0, 0.48, 0]}>
+        <boxGeometry args={[0.85, 1.05, 0.16]} />
+        <meshStandardMaterial
+          color={unlocked ? "#b99a68" : "#52664b"}
+          roughness={1}
+        />
+      </mesh>
+
+      {/* The door */}
+      <mesh
+        position={[0, 0.48, 0.1]}
+        onPointerDown={(event) => {
+          event.stopPropagation();
+          onClick();
+        }}
+      >
+        <boxGeometry args={[0.65, 0.85, 0.08]} />
+        <meshStandardMaterial
+          color={unlocked ? "#9b795a" : "#405746"}
+          emissive={unlocked ? "#e8b85e" : "#000000"}
+          emissiveIntensity={unlocked ? 0.8 : 0}
+          roughness={0.9}
+        />
+      </mesh>
+
+      {/* Golden doorknob */}
+      <mesh
+        position={[0.2, 0.45, 0.16]}
+        onPointerDown={(event) => {
+          event.stopPropagation();
+          onClick();
+        }}
+      >
+        <sphereGeometry args={[0.055, 12, 12]} />
+        <meshStandardMaterial
+          color="#f4cf79"
+          emissive="#e7ad48"
+          emissiveIntensity={0.6}
+        />
+      </mesh>
+    </group>
+  );
+}
+
+function World({ onDiscover, discoveredCount, onSecretDoorClick }) {
   return (
     <>
       <color attach="background" args={["#b8d6dc"]} />
@@ -286,6 +335,12 @@ function World({ onDiscover }) {
           )
         }
       />
+      
+      
+<SecretDoor
+  unlocked={discoveredCount >= 7}
+  onClick={onSecretDoorClick}
+/>
 
       {/* Trees */}
       <Tree position={[-2.2, 0.1, -0.7]} scale={1.05} />
@@ -387,7 +442,7 @@ export default function MiniatureWorld({ onBack,onSecretFound }) {
   const [discovery, setDiscovery] = useState(null);
   const [journalOpen, setJournalOpen] = useState(false);
   const [discovered, setDiscovered] = useState([]);
-
+  const [secretDoorOpen, setSecretDoorOpen] = useState(false);
   const handleDiscover = (id, title, text) => {
   setDiscovery({ title, text });
 
@@ -398,6 +453,21 @@ export default function MiniatureWorld({ onBack,onSecretFound }) {
   onSecretFound?.(id);
 };
 
+const unlockSecretDoor = () => {
+  if (discovered.length < 7) {
+    setDiscovery({
+      title: "A door beneath the ivy",
+      text: "Seven little wonders guard this secret. Find them all, and the garden will show you its hidden way.",
+    });
+    return;
+  }
+
+  setSecretDoorOpen(true);
+  setDiscovery({
+    title: "The garden's hidden secret",
+    text: "Behind the old cottage, a forgotten doorway opens. A tiny golden light invites you into a place that time forgot.",
+  });
+};
   
 return (
   <main className="miniature-world">
@@ -413,7 +483,24 @@ return (
       camera={{ position: [7, 6, 9], fov: 38 }}
       dpr={[1, 1.5]}
     >
-      <World onDiscover={handleDiscover} />
+      <World
+  onDiscover={handleDiscover}
+  discoveredCount={discovered.length}
+  onSecretDoorClick={() => {
+    if (discovered.length < 7) {
+      setDiscovery({
+        title: "A door beneath the ivy",
+        text: `The door is still locked. You have found ${discovered.length} of 7 garden secrets.`,
+      });
+    } else {
+      setSecretDoorOpen(true);
+      setDiscovery({
+        title: "The garden's hidden secret",
+        text: "The ivy parts, and the forgotten door opens. A golden light leads to a place hidden from the world.",
+      });
+    }
+  }}
+/>
     </Canvas>
 
 
